@@ -5,12 +5,12 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Node JS API Project",
+      title: "Divar API Project",
       version: "1.0.0",
     },
     servers: [
       {
-        url: `https://comforting-melba-d49d40.netlify.app/.netlify/functions/api`,
+        url: `http://localhost:3000`,
       },
     ],
   },

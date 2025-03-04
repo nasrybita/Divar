@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+//...
 const {
   createAdvertisement,
 } = require("../controllers/advertisementController");
@@ -56,16 +57,6 @@ const {
  *                   example: "direct"
  *           required:
  *             - textMessageInChat
- *         createdDate:
- *           type: string
- *           format: date-time
- *           description: The date when the advertisement was created
- *           example: "2023-04-01T12:00:00Z"
- *         updatedDate:
- *           type: string
- *           format: date-time
- *           description: The date when the advertisement was last updated
- *           example: "2023-04-05T12:00:00Z"
  */
 
 /**
@@ -92,26 +83,31 @@ const {
  */
 
 // create advertisement
+// Joi validation applied in the createAdvertisement controller
 router.post("/", createAdvertisement);
 
+// ...
 // get advertisement
 // router.get("/", async (req, res) => {
 //   try {
 //   } catch (err) {}
 // });
 
+// ...
 // get one advertisement
 // router.get("/:id", async (req, res) => {
 //   try {
 //   } catch (err) {}
 // });
 
+// ...
 // update one advertisement
 // router.patch("/:id", async (req, res) => {
 //   try {
 //   } catch (err) {}
 // });
 
+// ...
 // delete one advertisement
 // router.delete("/:id", async (req, res) => {
 //   try {

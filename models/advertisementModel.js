@@ -7,6 +7,7 @@ const advertisementSchema = new Schema({
     required: true,
     trim: true,
     minlength: 4,
+    index: true,
   },
 
   description: {
@@ -75,10 +76,12 @@ const advertisementSchema = new Schema({
       latitude: {
         type: Number,
         required: true,
+        index: true,
       },
       longitude: {
         type: Number,
         required: true,
+        index: true,
       },
     },
     required: true,

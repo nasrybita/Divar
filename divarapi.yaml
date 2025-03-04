@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Divar API Project
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/v1/advertisement:
+    post:
+      summary: Create a new advertisement
+      tags:
+        - Advertisement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Advertisement"
+      responses:
+        "201":
+          description: The advertisement was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisement"
+        "400":
+          description: Bad request
+components:
+  schemas:
+    Advertisement:
+      type: object
+      required:
+        - title
+        - description
+        - coordinates
+        - contactMethods
+      properties:
+        title:
+          type: string
+          description: The title of the advertisement
+          example: "Spacious apartment for rent"
+        description:
+          type: string
+          description: The description of the advertisement
+          example: "A beautiful and spacious apartment located in downtown."
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: number
+              description: Latitude of the location
+              example: 35.6895
+            longitude:
+              type: number
+              description: Longitude of the location
+              example: 139.6917
+          required:
+            - latitude
+            - longitude
+        contactMethods:
+          type: object
+          properties:
+            textMessageInChat:
+              type: boolean
+              example: true
+            phoneCall:
+              type: object
+              properties:
+                receiveCall:
+                  type: boolean
+                  example: true
+                callType:
+                  type: string
+                  enum:
+                    - direct
+                    - intermediary
+                  example: "direct"
+          required:
+            - textMessageInChat
