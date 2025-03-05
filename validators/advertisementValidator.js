@@ -34,4 +34,22 @@ const advertisementSchema = Joi.object({
   // features: Joi.object().default({}), // Adjust validations based on your requirements
 });
 
-module.exports = advertisementSchema;
+
+// Advertisement validation for update
+const updateAdvertisementSchema = Joi.object({
+  title: Joi.string().trim().min(4),
+  description: Joi.string().trim().min(10),
+  coordinates: Joi.object({
+    latitude: Joi.number(),
+    longitude: Joi.number(),
+  }),
+  contactMethods: Joi.object({
+    textMessageInChat: Joi.boolean().default(true),
+    phoneCall: Joi.object({
+      receiveCall: Joi.boolean().default(true),
+      callType: Joi.string().valid("direct", "intermediary").default("direct"),
+    }).default(),
+  }),
+}).min(1); // Ensure at least one field is provided for update
+
+module.exports = { advertisementSchema, updateAdvertisementSchema };

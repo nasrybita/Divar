@@ -19,6 +19,7 @@
     "express-winston": "^4.2.0",
     "fs": "^0.0.1-security",
     "joi": "^17.13.3",
+    "joi-objectid": "^4.0.2",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.1",

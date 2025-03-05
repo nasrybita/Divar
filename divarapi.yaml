@@ -4,27 +4,6 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000
-paths:
-  /api/v1/advertisement:
-    post:
-      summary: Create a new advertisement
-      tags:
-        - Advertisement
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Advertisement"
-      responses:
-        "201":
-          description: The advertisement was successfully created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Advertisement"
-        "400":
-          description: Bad request
 components:
   schemas:
     Advertisement:
@@ -71,9 +50,115 @@ components:
                   example: true
                 callType:
                   type: string
-                  enum:
-                    - direct
-                    - intermediary
+                  enum: ["direct", "intermediary"]
                   example: "direct"
           required:
             - textMessageInChat
+paths:
+  /api/v1/advertisement:
+    post:
+      summary: Create a new advertisement
+      tags: [Advertisement]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Advertisement"
+      responses:
+        201:
+          description: The advertisement was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisement"
+        400:
+          description: Bad request
+    get:
+      summary: Retrieve all advertisements
+      tags: [Advertisement]
+      responses:
+        200:
+          description: Successfully retrieved advertisements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Advertisement"
+        400:
+          description: Bad request
+  /api/v1/advertisement/{id}:
+    get:
+      summary: Retrieve a single advertisement by ID
+      tags: [Advertisement]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The advertisement ID
+      responses:
+        200:
+          description: Successfully retrieved the advertisement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisement"
+        404:
+          description: Advertisement not found
+        400:
+          description: Bad request
+    patch:
+      summary: Update an existing advertisement
+      tags: [Advertisement]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The advertisement ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Advertisement"
+      responses:
+        200:
+          description: Successfully updated the advertisement
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisement"
+        404:
+          description: Advertisement not found
+        400:
+          description: Invalid ID format or bad request
+    delete:
+      summary: Delete an advertisement by ID
+      tags: [Advertisement]
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The advertisement ID
+      responses:
+        200:
+          description: Advertisement successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Advertisement successfully deleted
+        404:
+          description: Advertisement not found
+        400:
+          description: Invalid ID format or bad request
